@@ -42,6 +42,12 @@
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 
+#ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
+        #define ENABLE_RGB_MATRIX_BAND_SPIRAL_NEON
+#        define ENABLE_RGB_MATRIX_NEON_CHEVRON
+#endif
+
+
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
         { 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38 }

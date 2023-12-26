@@ -163,9 +163,14 @@ void        rgb_matrix_step_reverse(void);
 void        rgb_matrix_step_reverse_noeeprom(void);
 void        rgb_matrix_sethsv(uint16_t hue, uint8_t sat, uint8_t val);
 void        rgb_matrix_sethsv_noeeprom(uint16_t hue, uint8_t sat, uint8_t val);
+void        rgb_matrix_sethsv2(uint16_t hue, uint8_t sat, uint8_t val);
+void        rgb_matrix_sethsv2_noeeprom(uint16_t hue, uint8_t sat, uint8_t val);
 HSV         rgb_matrix_get_hsv(void);
 uint8_t     rgb_matrix_get_hue(void);
 uint8_t     rgb_matrix_get_sat(void);
+HSV         rgb_matrix_get_hsv2(void);
+uint8_t     rgb_matrix_get_hue2(void);
+uint8_t     rgb_matrix_get_sat2(void);
 uint8_t     rgb_matrix_get_val(void);
 void        rgb_matrix_increase_hue(void);
 void        rgb_matrix_increase_hue_noeeprom(void);
@@ -224,6 +229,8 @@ bool        rgb_matrix_driver_allow_shutdown(void);
 #    define rgblight_step_reverse_noeeprom rgb_matrix_step_reverse_noeeprom
 #    define rgblight_sethsv rgb_matrix_sethsv
 #    define rgblight_sethsv_noeeprom rgb_matrix_sethsv_noeeprom
+#    define rgblight_sethsv2 rgb_matrix_sethsv2
+#    define rgblight_sethsv2_noeeprom rgb_matrix_sethsv2_noeeprom
 #    define rgblight_increase_hue rgb_matrix_increase_hue
 #    define rgblight_increase_hue_noeeprom rgb_matrix_increase_hue_noeeprom
 #    define rgblight_decrease_hue rgb_matrix_decrease_hue

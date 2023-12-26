@@ -51,7 +51,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EECONFIG_RGB_MATRIX_EXTENDED (uint16_t *)32
 
 // Size of EEPROM being used for core data storage
-#define EECONFIG_BASE_SIZE 34
+#define EECONFIG_BASE_SIZE 40
 
 // Size of EEPROM dedicated to keyboard- and user-specific data
 #ifndef EECONFIG_KB_DATA_SIZE

@@ -128,6 +128,7 @@ enum via_qmk_rgb_matrix_value {
     id_qmk_rgb_matrix_effect       = 2,
     id_qmk_rgb_matrix_effect_speed = 3,
     id_qmk_rgb_matrix_color        = 4,
+    id_qmk_rgb_matrix_color2        = 5,
 };
 
 enum via_qmk_audio_value {

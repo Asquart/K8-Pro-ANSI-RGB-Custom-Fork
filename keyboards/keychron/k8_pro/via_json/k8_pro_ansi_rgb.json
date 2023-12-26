@@ -43,7 +43,9 @@
                 ["Reactive Multiwide", 19],
                 ["Reactive Multinexus", 20],
                 ["Splash", 21],
-                ["Solid Splash", 22]
+                ["Solid Splash", 22],
+                ["Band Spiral Neon", 23],
+                ["Neon Chevron", 24]
               ]
             },
             {
@@ -54,10 +56,16 @@
               "content": ["id_qmk_rgb_matrix_effect_speed", 3, 3]
             },
             {
-              "showIf": "{id_qmk_rgb_matrix_effect} != 0 && ( {id_qmk_rgb_matrix_effect} < 4 || {id_qmk_rgb_matrix_effect} == 18 || ({id_qmk_rgb_matrix_effect} > 17 && {id_qmk_rgb_matrix_effect} != 21) ) ",
-              "label": "Color",
-              "type": "color",
-              "content": ["id_qmk_rgb_matrix_color", 3, 4]
+                "showIf": "{id_qmk_rgb_matrix_effect} != 0 && ( {id_qmk_rgb_matrix_effect} < 4 || {id_qmk_rgb_matrix_effect} == 18 || {id_qmk_rgb_matrix_effect} == 23 || {id_qmk_rgb_matrix_effect} == 24 || ({id_qmk_rgb_matrix_effect} > 17 && {id_qmk_rgb_matrix_effect} != 21) ) ",
+                "label": "Color",
+                "type": "color",
+                "content": [ "id_qmk_rgb_matrix_color", 3, 4 ]
+            },
+            {
+                "showIf": "{id_qmk_rgb_matrix_effect} == 23 || {id_qmk_rgb_matrix_effect} == 24",
+                "label": "Color2",
+                "type": "color",
+                "content": [ "id_qmk_rgb_matrix_color2", 3, 5 ]
             }
           ]
         }
