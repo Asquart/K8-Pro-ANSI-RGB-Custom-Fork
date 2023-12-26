@@ -22,7 +22,16 @@ bool neon_spiral_runner_2colors(effect_params_t* params, neon_runner_args neon_f
 }
 
 static RGB BAND_SPIRAL_NEON_math(RGB rgb1, RGB rgb2, int16_t dx, int16_t dy, uint8_t dist, uint8_t time) {
-    fract8 alpha = dist - time - atan2_8(dy, dx);
+    uint8_t spiral_pattern        = dist - time - atan2_8(dy, dx);
+    uint8_t transition_smoothness = 25;
+    uint8_t smoothing_spiral      = spiral_pattern - (255 - transition_smoothness);
+    if (smoothing_spiral < 0)
+    {
+        smoothing_spiral = 0;
+    }
+    smoothing_spiral = smoothing_spiral * 255 / transition_smoothness;
+    uint8_t corrected_spiral = spiral_pattern - smoothing_spiral;
+    uint8_t alpha = lerp8by8(corrected_spiral * (254 + transition_smoothness) / 255, corrected_spiral, smoothing_spiral);
     RGB   out;
     out.r = lerp8by8(rgb1.r, rgb2.r, alpha);
     out.g = lerp8by8(rgb1.g, rgb2.g, alpha);
