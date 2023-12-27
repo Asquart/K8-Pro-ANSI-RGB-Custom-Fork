@@ -31,6 +31,7 @@
             "splash": true,
             "solid_splash": true,
             "band_spiral_neon": true,
+            "band_spiral_neon_pow": true,
             "neon_chevron": true
         }
     }

@@ -1,10 +1,10 @@
-#ifdef ENABLE_RGB_MATRIX_BAND_SPIRAL_NEON
-RGB_MATRIX_EFFECT(BAND_SPIRAL_NEON)
+#ifdef ENABLE_RGB_MATRIX_BAND_SPIRAL_NEON_POW
+RGB_MATRIX_EFFECT(BAND_SPIRAL_NEON_POW)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
-typedef RGB (*neon_spiral_runner_args)(RGB rgb1, RGB rgb2, int16_t dx, int16_t dy, uint8_t dist, uint8_t time);
+typedef RGB (*neon_spiral_runner_pow_args)(RGB rgb1, RGB rgb2, int16_t dx, int16_t dy, uint8_t dist, uint8_t time);
 
-bool neon_spiral_runner_2colors(effect_params_t* params, neon_spiral_runner_args neon_func) {
+bool neon_spiral_pow_runner_2colors(effect_params_t* params, neon_spiral_runner_pow_args neon_func) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
     uint8_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 2);
@@ -21,14 +21,15 @@ bool neon_spiral_runner_2colors(effect_params_t* params, neon_spiral_runner_args
     return rgb_matrix_check_finished_leds(led_max);
 }
 
-static RGB BAND_SPIRAL_NEON_math(RGB rgb1, RGB rgb2, int16_t dx, int16_t dy, uint8_t dist, uint8_t time) {
+static RGB BAND_SPIRAL_NEON_POW_math(RGB rgb1, RGB rgb2, int16_t dx, int16_t dy, uint8_t dist, uint8_t time) {
     uint8_t  spiral_pattern        = dist - time - atan2_8(dy, dx);
-    uint8_t transition_smoothness = 16;
+    uint16_t spiral_pattern_pow    = pow(spiral_pattern, 1.5) / 16;
+    uint8_t transition_smoothness = 25;
     uint8_t  smoothness_reversed   = 254 - transition_smoothness;
     uint16_t smoothing_spiral;
-    if (spiral_pattern > smoothness_reversed)
+    if (spiral_pattern_pow > smoothness_reversed)
     {
-        smoothing_spiral = spiral_pattern - smoothness_reversed;
+        smoothing_spiral = spiral_pattern_pow - smoothness_reversed;
     }
     else
     {
@@ -36,9 +37,9 @@ static RGB BAND_SPIRAL_NEON_math(RGB rgb1, RGB rgb2, int16_t dx, int16_t dy, uin
     }
     smoothing_spiral         = smoothing_spiral * 254 / transition_smoothness;
     fract16 corrected_spiral;
-    if (spiral_pattern > smoothing_spiral)
+    if (spiral_pattern_pow > smoothing_spiral)
     {
-        corrected_spiral = spiral_pattern - smoothing_spiral;
+        corrected_spiral = spiral_pattern_pow - smoothing_spiral;
     }
     else
     {
@@ -52,9 +53,9 @@ static RGB BAND_SPIRAL_NEON_math(RGB rgb1, RGB rgb2, int16_t dx, int16_t dy, uin
     return out;
 }
 
-bool BAND_SPIRAL_NEON(effect_params_t* params) {
-    return neon_spiral_runner_2colors(params, &BAND_SPIRAL_NEON_math);
+bool BAND_SPIRAL_NEON_POW(effect_params_t* params) {
+    return neon_spiral_pow_runner_2colors(params, &BAND_SPIRAL_NEON_POW_math);
 }
 
 #    endif // RGB_MATRIX_CUSTOM_EFFECT_IMPLS
-#endif     // ENABLE_RGB_MATRIX_BAND_SPIRAL_NEON
+#endif     // ENABLE_RGB_MATRIX_BAND_SPIRAL_NEON_POW
